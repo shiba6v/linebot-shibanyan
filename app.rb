@@ -3,8 +3,6 @@ require 'sinatra'
 require 'line/bot'
 require 'active_record'
 require 'yaml'
-require './user.rb'
-require 'sqlite3'
 
 get '/' do
   'yes'
