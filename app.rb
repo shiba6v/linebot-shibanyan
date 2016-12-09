@@ -27,7 +27,7 @@ def reply_message(message_text)
       end
     end
   end
-  "以下のキーワードを含むメッセージを送ってね！" + reply_data.map{|item| item[:keyword]}.join("\n")
+  "以下のキーワードを含むメッセージを送ってね！\n" + reply_data.map{|item| item[:keyword]}.join("\n")
 end
 
 post '/callback' do
