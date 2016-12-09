@@ -1,0 +1,7 @@
+development:
+  adapter: sqlite3
+  database: db/development.db
+  host: localhost
+  username: root
+  password: password
+  encoding: utf8
