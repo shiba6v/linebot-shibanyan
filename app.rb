@@ -2,11 +2,12 @@ require 'rubygems'
 require 'sinatra'
 require 'line/bot'
 require 'active_record'
+require 'yaml'
 require './user.rb'
 require 'sqlite3'
 
 get '/' do
-	'yes'
+  'yes'
 end
 
 def client
@@ -14,6 +15,20 @@ def client
     config.channel_secret = ENV["LINE_CHANNEL_SECRET"]
     config.channel_token = ENV["LINE_CHANNEL_TOKEN"]
   }
+end
+
+def reply_data
+  @reply_data ||= YAML.load_file("reply_data.yml")
+end
+
+def reply_message(message_text)
+  for reply_item in reply_data
+    for keyword in reply_item[:keyword]
+      if message_text.include?(keyword)
+        return reply_item[:message].sample
+      end
+    end
+  end
 end
 
 post '/callback' do
@@ -26,15 +41,15 @@ post '/callback' do
 
   events = client.parse_events_from(body)
   events.each { |event|
-  	puts "------"
-  	p event
+    p "--------------------------------------------"
+    p event
     case event
     when Line::Bot::Event::Message
       case event.type
       when Line::Bot::Event::MessageType::Text
         message = {
           type: 'text',
-          text: event.message['text'] + "💕"
+          text: reply_message(event.message['text'])
         }
         client.reply_message(event['replyToken'], message)
       when Line::Bot::Event::MessageType::Image, Line::Bot::Event::MessageType::Video
@@ -43,8 +58,8 @@ post '/callback' do
         tf.write(response.body)
       end
     when Line::Bot::Event::Beacon
-    	p "beacon ok"
-      	p event['beacon']['hwid']
+      p "beacon ok"
+        p event['beacon']['hwid']
         message = {
           type: 'text',
           text: "わいわい"

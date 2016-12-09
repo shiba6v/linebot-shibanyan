@@ -1,0 +1,12 @@
+- 
+  :keyword: 
+    - "褒めて"
+  :type: "include"
+  :message:
+    - "偉いぞ"
+-
+  :keyword:
+    - "おはよ"
+  :type: "include"
+  :message:
+    - "おはよう"
