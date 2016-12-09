@@ -1,12 +1,24 @@
 - 
   :keyword: 
     - "褒めて"
-  :type: "include"
+    - "ほめて"
+  :type: :include
   :message:
-    - "偉いぞ"
+    - "偉いぞ〜！"
+    - "いつも頑張ってるね！"
+    - "いいね〜！"
+    - "すごい！"
 -
   :keyword:
     - "おはよ"
-  :type: "include"
+  :type: :include
   :message:
     - "おはよう"
+- 
+  :keyword:
+    - "おやす"
+  :type: :include
+  :message:
+    - "おやすみなさい！"
+    - "寝るの？"
+    - "おやすみなさ〜い！!"
